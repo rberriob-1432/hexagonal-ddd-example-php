@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 final class Flash
 {
+    private const SESSION_KEY = '_flash';
     public static function start(): void
     {
         if (session_status() !== PHP_SESSION_ACTIVE) {
@@ -14,19 +15,25 @@ final class Flash
     public static function set(string $key, mixed $value): void
     {
         self::start();
-        $_SESSION['_flash'][$key] = $value;
+
+        $_SESSION[self::SESSION_KEY][$key] = $value;
     }
 
     public static function get(string $key, mixed $default = null): mixed
     {
         self::start();
 
-        if (!isset($_SESSION['_flash'][$key])) {
+        if (!isset($_SESSION[self::SESSION_KEY][$key])) {
             return $default;
         }
 
-        $value = $_SESSION['_flash'][$key];
-        unset($_SESSION['_flash'][$key]);
+        $value = $_SESSION[self::SESSION_KEY][$key];
+
+        unset($_SESSION[self::SESSION_KEY][$key]);
+
+        if ($_SESSION[self::SESSION_KEY] === []) {
+            unset($_SESSION[self::SESSION_KEY]);
+        }
 
         return $value;
     }
@@ -44,9 +51,21 @@ final class Flash
      */
     public static function old(): array
     {
-        $data = self::get('old', array());
+        $data = self::get('old', []);
 
-        return is_array($data) ? $data : array();
+        if (!is_array($data)) {
+            return [];
+        }
+
+        $result = [];
+
+        foreach ($data as $key => $value) {
+            if (is_string($key) && is_string($value)) {
+                $result[$key] = $value;
+            }
+        }
+
+        return $result;
     }
 
     /**
@@ -62,9 +81,21 @@ final class Flash
      */
     public static function errors(): array
     {
-        $errors = self::get('errors', array());
+        $errors = self::get('errors', []);
 
-        return is_array($errors) ? $errors : array();
+        if (!is_array($errors)) {
+            return [];
+        }
+
+        $result = [];
+
+        foreach ($errors as $key => $value) {
+            if (is_string($key) && is_string($value)) {
+                $result[$key] = $value;
+            }
+        }
+
+        return $result;
     }
 
     public static function setMessage(string $message): void
