@@ -30,7 +30,7 @@ final class Connection
     public function createPdo(): PDO
     {
         $dsn = sprintf(
-            'mysql:host=%s;port=%d;dbname=%s;charset=%s',
+            'mysql:host=%s;port=%d;dbname=%s;charset=%s',//aqui esta
             $this->host,
             $this->port,
             $this->database,
