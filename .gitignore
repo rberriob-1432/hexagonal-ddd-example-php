@@ -65,7 +65,9 @@ $RECYCLE.BIN/
 *.iml
 nbproject/
 .netbeans/
-
+# Copias de seguridad de bases de datos (pueden contener datos sensibles)
+backups/
+*.sql.bak
 
 # Node (si en algún momento se añaden herramientas front-end)
 
@@ -79,3 +81,4 @@ yarn-error.log*
 docs/
 .vscode/settings.json
 *.ps1
+.env
