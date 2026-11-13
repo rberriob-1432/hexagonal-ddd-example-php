@@ -1,4 +1,3 @@
-
 <?php
 
 class VehiculoExcepcionNumPuestos extends InvalidArgumentException

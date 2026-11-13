@@ -1,4 +1,3 @@
-
 <?php
 
 class VehiculoExcepcionCilindraje extends InvalidArgumentException

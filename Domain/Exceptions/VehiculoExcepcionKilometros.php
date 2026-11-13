@@ -1,4 +1,3 @@
-
 <?php
 
 class VehiculoExcepcionKilometros extends InvalidArgumentException

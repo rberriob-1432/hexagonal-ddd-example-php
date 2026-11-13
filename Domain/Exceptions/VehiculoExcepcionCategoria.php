@@ -1,4 +1,3 @@
-
 <?php
 
 class VehiculoExcepcionCategoria extends InvalidArgumentException

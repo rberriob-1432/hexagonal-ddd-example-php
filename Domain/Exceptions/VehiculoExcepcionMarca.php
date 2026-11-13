@@ -1,4 +1,3 @@
-
 <?php
 
 class VehiculoExcepcionMarca extends InvalidArgumentException

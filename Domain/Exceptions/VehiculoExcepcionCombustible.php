@@ -1,4 +1,3 @@
-
 <?php
 class VehiculoExcepcionCombustible extends InvalidArgumentException
 {
